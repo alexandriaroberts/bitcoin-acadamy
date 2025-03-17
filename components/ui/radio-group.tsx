@@ -25,10 +25,13 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       <div className={className} {...props} ref={ref}>
         {React.Children.map(props.children, (child) => {
           if (React.isValidElement(child) && child.type === RadioGroupItem) {
-            return React.cloneElement(child, {
-              checked: value === (child.props as RadioGroupItemProps).value,
-              onChange: handleChange,
-            });
+            return React.cloneElement(
+              child as React.ReactElement<RadioGroupItemProps>,
+              {
+                checked: value === (child.props as RadioGroupItemProps).value,
+                onChange: handleChange,
+              }
+            );
           }
           return child;
         })}
