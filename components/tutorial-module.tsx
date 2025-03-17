@@ -8,6 +8,7 @@ import { SpotInvalidTransaction } from './stations/spot-invalid-transaction';
 import { ProgressBar } from './ui/progress-bar';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 type KeyPair = {
   privateKey: string;
@@ -70,6 +71,32 @@ export function TutorialModule() {
     }
   };
 
+  // Simple 2D Bitcoin animation for intro and completion screens
+  const BitcoinAnimation = () => (
+    <div className='flex justify-center my-8'>
+      <div className='flex space-x-6'>
+        {[1, 2, 3].map((i) => (
+          <motion.div
+            key={i}
+            className='w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center'
+            animate={{
+              y: [0, -15, 0],
+              scale: [1, 1.05, 1],
+            }}
+            transition={{
+              duration: 2,
+              delay: i * 0.3,
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: 'loop',
+            }}
+          >
+            <span className='text-white text-2xl font-bold'>₿</span>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <div className='bg-slate-800 rounded-lg shadow-xl overflow-hidden'>
       <div className='p-6'>
@@ -90,6 +117,9 @@ export function TutorialModule() {
                 You'll generate cryptographic keys, sign transactions, verify
                 signatures, and test your knowledge with a challenge.
               </p>
+
+              <BitcoinAnimation />
+
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-8'>
                 <div className='bg-slate-700 p-4 rounded-lg'>
                   <h4 className='font-bold text-yellow-400 mb-2'>
@@ -152,6 +182,9 @@ export function TutorialModule() {
               <p className='text-lg'>
                 You've completed Module 1: Digital Signatures & Ownership
               </p>
+
+              <BitcoinAnimation />
+
               <div className='bg-slate-700 p-6 rounded-lg max-w-2xl mx-auto mt-6'>
                 <h4 className='font-bold text-xl mb-4'>Key Takeaways:</h4>
                 <ul className='text-left space-y-3'>

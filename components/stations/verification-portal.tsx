@@ -11,6 +11,8 @@ import {
   Network,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+// Remove this import
+// import { VerificationAnimation } from "../3d/verification-animation"
 
 interface VerificationPortalProps {
   onVerificationComplete: () => void;
@@ -29,10 +31,12 @@ export function VerificationPortal({
     false,
   ]);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [verificationProgress, setVerificationProgress] = useState(0);
 
   const startVerification = () => {
     setIsVerifying(true);
     setNodeStatuses([false, false, false, false, false]);
+    setVerificationProgress(0);
 
     // Simulate nodes verifying one by one
     const verifyNode = (index: number) => {
@@ -50,6 +54,7 @@ export function VerificationPortal({
           newStatuses[index] = true;
           return newStatuses;
         });
+        setVerificationProgress((index + 1) * 20);
         verifyNode(index + 1);
       }, 600);
     };
@@ -73,6 +78,13 @@ export function VerificationPortal({
           <Network className='h-5 w-5 text-blue-400 mr-2' />
           Bitcoin Network Verification
         </h4>
+
+        {/* And remove this div */}
+        {/* <div className="flex justify-center mb-6">
+          <div className="w-64 h-64">
+            <VerificationAnimation isVerified={verificationComplete} progress={verificationProgress} />
+          </div>
+        </div> */}
 
         <div className='flex flex-wrap justify-center gap-4 my-6'>
           {nodeStatuses.map((verified, index) => (

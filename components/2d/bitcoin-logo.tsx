@@ -1,7 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 
-export function BitcoinLogo2D() {
+export function BitcoinLogo() {
   return (
     <motion.div
       className='w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center'
